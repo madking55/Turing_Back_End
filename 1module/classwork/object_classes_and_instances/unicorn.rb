@@ -3,9 +3,9 @@
 class Unicorn
   attr_reader :name, :color, :magical_powers
 
-  def initialize(name, color)
-    @name = name
-    @color = color
+  def initialize(name_parameter, color_parameter)
+    @name = name_parameter
+    @color = color_parameter
     @magical_powers = []
   end
 
@@ -13,3 +13,14 @@ class Unicorn
     @magical_powers << power
   end
 end
+
+class Power
+  attr_reader :name, :energy_required
+
+  def initialize(name, energy_required)
+    @name = name
+    @energy_required = energy_required
+  end
+end
+
+

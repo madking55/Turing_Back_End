@@ -1,8 +1,7 @@
 # frozen_string_literal: true
-
 class Converter
   def print_welcome
-    puts 'Welcome to Converter!'
+    puts "Welcome to Converter!"
   end
 
   def convert_to_celsius(fahrenheit)
@@ -10,7 +9,7 @@ class Converter
   end
 
   def convert_to_fahrenheit(celsius)
-    ((celsius * 1.8) + 32).round(2)
+    (celsius * 1.8) + 32
   end
 end
 
