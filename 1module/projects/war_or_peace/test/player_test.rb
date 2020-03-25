@@ -27,8 +27,10 @@ class PlayerTest < Minitest::Test
 
     assert_equal deck, player.deck
 
-    3.times { player.deck.remove_card }
-    assert_equal [], player.deck.cards
+    2.times { player.deck.remove_card }
+    refute player.has_lost?
+
+    player.deck.remove_card
     assert player.has_lost?
   end
 end
