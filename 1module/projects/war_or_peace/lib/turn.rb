@@ -32,18 +32,16 @@ class Turn
       @spoils_of_war << player1.deck.remove_card
       @spoils_of_war << player2.deck.remove_card
     elsif type == :war
-     @spoils_of_war << player1.deck.remove_card(3)
-     @spoils_of_war << player2.deck.remove_card(3) 
+      3.times { @spoils_of_war << player1.deck.remove_card }
+      3.times { @spoils_of_war << player2.deck.remove_card }
     elsif type == :mutually_assured_destruction
-      player1.deck.remove_card(3)
-      player2.deck.remove_card(3)
+      3.times { player1.deck.remove_card }
+      3.times { player2.deck.remove_card }
     end
   end
 
   def award_spoils(winner)
-    if winner != 'No Winner'
-       @spoils_of_war.size.times { winner.deck.cards << @spoils_of_war.shift }
-    end
+    @spoils_of_war.size.times { winner.deck.cards << @spoils_of_war.shift } if winner != 'No Winner'
+    @spoils_of_war
   end
-
 end
