@@ -17,11 +17,10 @@ class Game
     p '------------------------------------------------------------------'
 
     user_input = gets.chomp.upcase
-
     if user_input == 'GO'
       take_turn
     else
-      p "In order to play the game type 'GO'"
+      p "In order to start the game type 'GO'"
     end
   end
 
@@ -49,11 +48,11 @@ class Game
   end
 
   def continue_game
-   if player1.has_lost? || player2.has_lost? || turns_count >= 20
-    end_game 
-   else
-    take_turn
-   end
+    if player1.has_lost? || player2.has_lost? || turns_count == 20
+      end_game
+    else
+      take_turn
+    end
   end
 
   def end_game
@@ -65,5 +64,4 @@ class Game
       p '---- DRAW ----'
     end
   end
-
 end
