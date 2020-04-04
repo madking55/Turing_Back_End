@@ -1,10 +1,7 @@
-singers = ["billie", "ariana", "lizzo", "leon"]
+require 'pry'
 
-capitalized = []
-all_caps = []
-
-singers.each { |singer| capitalized << singer.capitalize }
-singers.each { |singer| all_caps << singer.upcase }
-
-p capitalized
-p all_caps
+favorite_things = ["Trapper Keeper", "Netscape Navigator", "Troll Doll"]
+binding.pry
+new_thing = "Banana Split"
+favorite_things << new_thing
+binding.pry
