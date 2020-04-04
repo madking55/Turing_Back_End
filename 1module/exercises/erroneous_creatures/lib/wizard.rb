@@ -9,7 +9,7 @@ class Wizard
   end
 
   def bearded?
-    @bearded
+    @bearded[:bearded]
   end
 
   def incantation(x)
