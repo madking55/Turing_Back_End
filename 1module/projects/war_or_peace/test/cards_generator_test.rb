@@ -27,7 +27,7 @@ class CardsGeneratorTest < Minitest::Test
     cards_generator = CardsGenerator.new('cards.txt')
     cards_generator.import_from_file
     
-    assert cards_generator.cards.all?(Card)
+    assert cards_generator.transform_to_card.all?(Card)
   end
 
 end
