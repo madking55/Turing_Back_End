@@ -23,11 +23,9 @@ class CardsGeneratorTest < Minitest::Test
     assert_equal 52, cards_generator.game_deck.size
   end
 
-  def test_it_transforms_elements_of_deck_into_cards
+  def test_it_return_array_of_cards
     cards_generator = CardsGenerator.new('cards.txt')
-    cards_generator.import_from_file
-    
-    assert cards_generator.transform_to_card.all?(Card)
-  end
 
+    assert cards_generator.cards.all?(Card)
+  end
 end
