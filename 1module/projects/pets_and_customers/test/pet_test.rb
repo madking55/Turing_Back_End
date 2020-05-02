@@ -9,9 +9,10 @@ class PetTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    samson = Pet.new({name: "Samson", type: :dog})
+    samson = Pet.new({name: "Samson", type: :dog, age: 3})
     assert_equal "Samson", samson.name
     assert_equal :dog, samson.type
+    assert_equal 3, samson.age
   end
 
   def test_it_is_not_fed_by_default
