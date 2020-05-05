@@ -22,10 +22,12 @@ class Board
     }
   end
 
+  # Validating Coordinates
   def vaild_coordinate?(cell)
     @cells.keys.include?(cell)
   end
 
+  # Validating Placements
   def valid_placement?(ship, coordinates)
     coordinates_and_ship_size_equal?(ship, coordinates) && 
     consecutive_coordinates?(ship, coordinates)
@@ -40,7 +42,6 @@ class Board
   end
 
   def horizontal_check(ship, coordinates)
-
     # find the first cell in coordinates
     c = coordinates[0]  
 
@@ -51,9 +52,19 @@ class Board
     coordinates == @cells.keys[index_of_c_in_cells...coordinates.size + index_of_c_in_cells]
   end
 
-  def vertical_check
-    # row_size = Math.sqrt(@cells.size).to_i
+  def vertical_check(ship, coordinates)
+    row_size = Math.sqrt(@cells.size).to_i
 
+    # check if coordinates array is equal to array in columns starting from c
+    expected = []
+    expected[0] = coordinates[0] 
+  
+    while expected.size < coordinates.size do 
+      expected << @cells.keys[@cells.keys.index(expected.last) + row_size]
+    end
+    expected 
+
+    expected == coordinates
   end
 
 end

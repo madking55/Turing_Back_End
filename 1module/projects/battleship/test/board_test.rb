@@ -28,16 +28,6 @@ class BoardTest < Minitest::Test
     refute board.vaild_coordinate?("A22")
   end
 
-  def test_it_can_validate_ship_placement
-    skip
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2) 
-
-    assert board.valid_placement?(submarine, ["A1", "A2"])
-    assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
-  end
-
   def test_coordinates_and_ship_size_equal
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
@@ -48,20 +38,18 @@ class BoardTest < Minitest::Test
   end
 
   def test_consecutive_coordinates?
-    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2) 
-    # binding.pry
 
-    # refute board.consecutive_coordinates?(cruiser, ["A1", "A2", "A4"])
-    # refute board.consecutive_coordinates?(submarine, ["A1", "C1"])
-    # refute board.consecutive_coordinates?(cruiser, ["A3", "A2", "A1"])
-    # refute board.consecutive_coordinates?(submarine, ["C1", "B1"])
+    refute board.consecutive_coordinates?(cruiser, ["A1", "A2", "A4"])
+    refute board.consecutive_coordinates?(submarine, ["A1", "C1"])
+    refute board.consecutive_coordinates?(cruiser, ["A3", "A2", "A1"])
+    refute board.consecutive_coordinates?(submarine, ["C1", "B1"])
+
     assert board.consecutive_coordinates?(cruiser, ["A2", "A3", "A4"])
-
-    # assert board.consecutive_coordinates?(submarine, ["A1", "B1"])
-    # assert board.consecutive_coordinates?(cruiser, ["A3", "B3", "C3"])
+    assert board.consecutive_coordinates?(submarine, ["A1", "B1"])
+    assert board.consecutive_coordinates?(cruiser, ["A3", "B3", "C3"])
   end
 
   def test_horizontal_consecutive_coordinates
@@ -74,14 +62,32 @@ class BoardTest < Minitest::Test
     assert board.horizontal_check(submarine, ["A1", "A2"])
   end
 
+  def test_vertical_consecutive_coordinates
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2) 
+
+    refute board.vertical_check(submarine, ["C1", "B1"])
+    assert board.vertical_check(submarine, ["A1", "B1"])
+    assert board.vertical_check(cruiser, ["A3", "B3", "C3"])
+  end
+
   def test_coordinates_not_diagonal
-    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2) 
 
     refute board.valid_placement?(cruiser, ["A1", "B2", "C3"])
     refute board.valid_placement?(submarine, ["C2", "D3"])
+  end
+
+  def test_it_can_validate_ship_placement
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2) 
+
+    assert board.valid_placement?(submarine, ["A1", "A2"])
+    assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
   
