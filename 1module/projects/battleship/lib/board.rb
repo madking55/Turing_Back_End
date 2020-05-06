@@ -29,12 +29,12 @@ class Board
 
   # Validating Placements
   def valid_placement?(ship, coordinates)
-    coordinates_and_ship_size_equal?(ship, coordinates) && 
+    # the number of coordinates in the array should be the same as the length of the ship
+    return false unless ship.length == coordinates.count
+    # ships don’t overlap
+    return false if coordinates.any? {|cell| @cells[cell].ship != nil}
+    # coordinates are consecutive and not diagonal
     consecutive_coordinates?(ship, coordinates)
-  end
-
-  def coordinates_and_ship_size_equal?(ship, coordinates)
-    ship.length == coordinates.count
   end
 
   def consecutive_coordinates?(ship, coordinates)
@@ -67,4 +67,21 @@ class Board
     expected == coordinates
   end
 
+  # Placing Ships
+  def place(ship, coordinates)
+    coordinates.each {|cell| @cells[cell].place_ship(ship)} if (valid_placement?(ship, coordinates))
+  end
+
+  # Rendering the Board
+  def render(show_ships = false)
+    "  1 2 3 4 \n" +
+    "A #{["A1", "A2", "A3", "A4"].map { |cell| @cells[cell].render(show_ships)}.join(" ")} \n" +
+    "B #{["B1", "B2", "B3", "B4"].map { |cell| @cells[cell].render(show_ships)}.join(" ")} \n" +
+    "C #{["C1", "C2", "C3", "C4"].map { |cell| @cells[cell].render(show_ships)}.join(" ")} \n" +
+    "D #{["D1", "D2", "D3", "D4"].map { |cell| @cells[cell].render(show_ships)}.join(" ")} \n"
+  end
+ 
+
+
+  
 end
