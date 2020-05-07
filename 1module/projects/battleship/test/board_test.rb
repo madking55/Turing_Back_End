@@ -102,6 +102,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Ship, cell_1.ship
     assert cell_1.ship == cell_2.ship
     assert cell_4.empty?
+    assert_equal 3, board.cells.count { |key, value| board.cells[key].empty? == false }
   end
 
   def test_ships_dont_overlap

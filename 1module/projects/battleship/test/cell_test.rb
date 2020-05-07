@@ -22,7 +22,7 @@ class CellTest < Minitest::Test
     assert cell.empty?
   end
 
-  def test_it_contains_ship
+  def test_it_places_ship
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
