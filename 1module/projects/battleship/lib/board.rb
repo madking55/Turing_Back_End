@@ -60,10 +60,14 @@ class Board
     expected[0] = coordinates[0] 
   
     while expected.size < coordinates.size do 
-      expected << @cells.keys[@cells.keys.index(expected.last) + row_size]
+      if @cells.keys.index(expected.last) + row_size < @cells.keys.index(@cells.keys.last)
+        index_of_coordinate_in_cells_keys = @cells.keys.index(expected.last)
+        expected << @cells.keys[index_of_coordinate_in_cells_keys + row_size]
+      else
+        return false
+      end
     end
     expected 
-
     expected == coordinates
   end
 

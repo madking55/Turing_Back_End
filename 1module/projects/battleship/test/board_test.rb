@@ -70,6 +70,7 @@ class BoardTest < Minitest::Test
     refute board.vertical_check(submarine, ["C1", "B1"])
     assert board.vertical_check(submarine, ["A1", "B1"])
     assert board.vertical_check(cruiser, ["A3", "B3", "C3"])
+    refute board.vertical_check(cruiser, ["B3", "D3", "A3"])
   end
 
   def test_coordinates_not_diagonal
@@ -87,6 +88,7 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2) 
 
     assert board.valid_placement?(submarine, ["A1", "A2"])
+    refute board.vertical_check(cruiser, ["B3", "C3", "A3"])
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 

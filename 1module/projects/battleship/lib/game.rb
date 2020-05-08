@@ -34,29 +34,51 @@ class Game
   end
   
 
-  def place_computer_ship
-    ship = @computer_ships.last
-    # coordinates = ["A1", "B1", "C1"]
-    # coordinates = ["A1", "C2", "C3"]
-    # coordinates = @computer_board.cells.keys[0..2]
+  def place_computer_cruiser
+    ship = @computer_ships.first
     coordinates = []
-    loop do
-      (ship.length).times { coordinates << @computer_board.cells.keys.sample }
-      break if @computer_board.valid_placement?(ship, coordinates)
+    (ship.length).times { coordinates << @computer_board.cells.keys.sample }
+    if @computer_board.valid_placement?(ship, coordinates)
+      @computer_board.place(ship, coordinates)
+    else
+      until @computer_board.valid_placement?(ship, coordinates)
+        coordinates = []
+        (ship.length).times { coordinates << @computer_board.cells.keys.sample }
+      end
+      @computer_board.place(ship, coordinates)
     end
-    @computer_board.place(ship, coordinates)
   end
 
-  def place_player_ship
-    ship = @player_ships.last
-    puts "Enter the squares for the Submarine (2 spaces):"
-    coordinates = gets.chomp.upcase.chars.each_slice(2).to_a.map(&:join)
-    if @player_board.valid_placement?(ship, coordinates)
-      @player_board.place(ship, coordinates)
-    # else
-    #   "Sorry, those are not valid coordinates. Please try again"
-    # until @player_board.valid_placement?(ship, coordinates)
-    #   coordinates = gets.chomp.upcase.chars.each_slice(2).to_a.map(&:join)
+  def place_computer_submarine
+    ship = @computer_ships.last
+    coordinates = []
+    (ship.length).times { coordinates << @computer_board.cells.keys.sample }
+    if @computer_board.valid_placement?(ship, coordinates)
+      @computer_board.place(ship, coordinates)
+    else
+      until @computer_board.valid_placement?(ship, coordinates)
+        coordinates = []
+        (ship.length).times { coordinates << @computer_board.cells.keys.sample }
+      end
+      @computer_board.place(ship, coordinates)
+    end
+  end
+
+
+
+  def place_player_ships
+    @player_ships.each do |ship|
+      puts "Enter the squares for the #{ship.name} (#{ship.length} spaces):"
+      coordinates = gets.chomp.upcase.chars.each_slice(2).to_a.map(&:join)
+      if @player_board.valid_placement?(ship, coordinates)
+        @player_board.place(ship, coordinates)
+      else
+        until @player_board.valid_placement?(ship, coordinates)
+          puts "Sorry, those are not valid coordinates. Please try again"
+          coordinates = gets.chomp.upcase.chars.each_slice(2).to_a.map(&:join)
+        end
+        @player_board.place(ship, coordinates)
+      end
     end
   end
 
