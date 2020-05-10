@@ -23,33 +23,19 @@ class GameTest < Minitest::Test
     assert_equal 2, game.player_ships.length
   end
 
-  def test_it_places_computer_submarine
+  def test_it_places_computer_ships
     game = Game.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     computer_ships = [cruiser, submarine]
-    game.place_computer_submarine
+    game.place_computer_ships
 
-    assert_equal 2, game.computer_board.cells.count { |key, value| game.computer_board.cells[key].empty? == false}
+    assert_equal 5, game.computer_board.cells.count { |key, value| game.computer_board.cells[key].empty? == false}
     expected_board = game.computer_board.render(true)
     assert expected_board.include?("S")
   end
-
-  def test_it_places_computer_cruiser
-    game = Game.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    computer_ships = [cruiser, submarine]
-    game.place_computer_cruiser
-
-    assert_equal 3, game.computer_board.cells.count { |key, value| game.computer_board.cells[key].empty? == false}
-    expected_board = game.computer_board.render(true)
-    assert expected_board.include?("S")
-  end
-  
 
   def test_it_places_player_ships
-    skip
     game = Game.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -60,4 +46,37 @@ class GameTest < Minitest::Test
     expected_board = game.player_board.render(true)
     assert expected_board.include?("S")
   end
+
+  def test_player_can_take_shot
+    game = Game.new
+    @computer_board = Board.new
+    game.place_computer_ships
+
+    assert_instance_of String, game.player_takes_shot
+  end
+
+  def test_computer_can_take_shot
+    game = Game.new
+    @player_board = Board.new
+    game.place_player_ships
+
+    assert_instance_of String, game.computer_takes_shot
+  end
+
+  def it_can_end_game
+    game = Game.new
+    @player_board = Board.new
+    @computer_board = Board.new
+    @winner = nil
+    game.player_board.place(Ship.new("Cruiser", 3), ["A1", "A2", "A3"])
+    game.player_board.place(Ship.new("Submarine", 2), ["B1", "B2"])
+    game.player_board.cells["A1"].fire_upon
+    game.player_board.cells["A2"].fire_upon
+    game.player_board.cells["A3"].fire_upon
+    game.player_board.cells["B1"].fire_upon
+    game.player_board.cells["B2"].fire_upon
+
+    assert_equal "computer", game.winner
+  end
+
 end
