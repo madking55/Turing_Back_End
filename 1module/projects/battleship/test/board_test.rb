@@ -58,6 +58,7 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2) 
 
     refute board.horizontal_check(cruiser, ["A1", "A2", "A4"])
+    refute board.horizontal_check(cruiser, ["A3", "A4", "B1"])
     assert board.horizontal_check(cruiser, ["A2", "A3", "A4"])
     assert board.horizontal_check(submarine, ["A1", "A2"])
   end
@@ -87,6 +88,7 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2) 
 
+    assert board.valid_placement?(submarine, ["C4", "D4"])
     assert board.valid_placement?(submarine, ["A1", "A2"])
     refute board.vertical_check(cruiser, ["B3", "C3", "A3"])
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
@@ -134,8 +136,9 @@ class BoardTest < Minitest::Test
                           "C . . . S \n" +
                           "D . . . S \n"
 
-    assert_equal board_showing_ships, board.render(true)
-
+    # assert_equal board_showing_ships, board.render(true)
+    cell = "A1"
+    assert_equal "S", board.cells[cell].render(true)
   end
   
 end

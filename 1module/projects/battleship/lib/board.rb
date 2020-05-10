@@ -49,7 +49,12 @@ class Board
     index_of_c_in_cells = @cells.keys.index(coordinates[0]) 
 
     # check if coordinates array is equal to array in rows starting from c
-    coordinates == @cells.keys[index_of_c_in_cells...coordinates.size + index_of_c_in_cells]
+    consecutive = coordinates == @cells.keys[index_of_c_in_cells...coordinates.size + index_of_c_in_cells]
+
+    # check if coordinates fit in the same row
+    same_row = coordinates.first.chars[0] == coordinates.last.chars[0]
+
+    consecutive && same_row
   end
 
   def vertical_check(ship, coordinates)
@@ -60,7 +65,7 @@ class Board
     expected[0] = coordinates[0] 
   
     while expected.size < coordinates.size do 
-      if @cells.keys.index(expected.last) + row_size < @cells.keys.index(@cells.keys.last)
+      if @cells.keys.index(expected.last) + row_size <= @cells.keys.index(@cells.keys.last)
         index_of_coordinate_in_cells_keys = @cells.keys.index(expected.last)
         expected << @cells.keys[index_of_coordinate_in_cells_keys + row_size]
       else
