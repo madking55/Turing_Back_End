@@ -1,6 +1,5 @@
 require 'csv'
 
-
 class ItemCollection
 
   attr_reader :all
@@ -9,7 +8,9 @@ class ItemCollection
     @all = items
   end
 
-  def where(merchant_id)
-    @all.select { |item| item.merchant_id == merchant_id }
+  def where(key_value_pair)
+    key = key_value_pair.keys.first
+    value = key_value_pair.values.first
+    @all.find_all { |item| item.send(key) == value }
   end
 end

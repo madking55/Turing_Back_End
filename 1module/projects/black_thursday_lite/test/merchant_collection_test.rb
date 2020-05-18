@@ -3,7 +3,6 @@ require './lib/merchant'
 require './lib/merchant_collection'
 require './lib/sales_engine'
 
-
 class MerchantCollectionTest < Minitest::Test
   
   def setup 
