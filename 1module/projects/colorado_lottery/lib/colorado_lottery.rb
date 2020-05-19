@@ -2,8 +2,8 @@ class ColoradoLottery
 attr_reader :registered_contestants, :current_contestants, :winners
 
   def initialize
-    @registered_contestants = {}
-    @current_contestants = {}
+    @registered_contestants = Hash.new { |hash, key| hash[key] = [] }
+    @current_contestants = Hash.new { |hash, key| hash[key] = [] }
     @winners = []
   end
 
@@ -14,4 +14,22 @@ attr_reader :registered_contestants, :current_contestants, :winners
   def can_register?(contestant, game)
     interested_and_18?(contestant, game) && (!contestant.out_of_state? || game.national_drawing?)
   end
+
+  def register_contestant(contestant, game)
+    registered_contestants[game.name] << contestant if can_register?(contestant, game)
+  end
+
+  def eligible_contestants(game)
+    # eligible_contestants is a list of all the contestants who have been registered to play a given game and that have more spending_money than the cost.
+    registered_contestants[game.name].select { |contestant| contestant.spending_money >= game.cost }
+  end
+  
+  def charge_contestants(game)
+  # current_contestants are lists of contestant names who have been charged, organized by game
+    eligible_contestants(game).each do |contestant|
+      contestant.spending_money -= game.cost
+      current_contestants[game] << contestant.full_name
+    end
+  end
+
 end
