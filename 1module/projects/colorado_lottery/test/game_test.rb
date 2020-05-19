@@ -20,5 +20,4 @@ class GameTest < Minitest::Test
     assert @mega_millions.national_drawing?
     refute @pick_4.national_drawing?
   end
-
 end
