@@ -2,6 +2,8 @@ require 'csv'
 
 class StatTracker
 
+  attr_reader :games_path, :teams_path, :game_teams_path
+
   def self.from_csv(locations)
     games_path = locations[:games]
     teams_path = locations[:teams]
