@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/contestant'
 require './lib/colorado_lottery'
+require "mocha/minitest"
 require 'pry'
 
 class ColoradoLotteryTest < Minitest::Test 
@@ -156,6 +157,27 @@ class ColoradoLotteryTest < Minitest::Test
     }
   end
 
-  
+  def test_it_can_draw_and_announce_winners
+    @lottery.register_contestant(@alexander, @pick_4)
+    @lottery.register_contestant(@alexander, @mega_millions)
+    @lottery.register_contestant(@frederick, @mega_millions)
+    @lottery.register_contestant(@winston, @cash_5)
+    @lottery.register_contestant(@winston, @mega_millions)
+    @lottery.register_contestant(@grace, @mega_millions)
+    @lottery.register_contestant(@grace, @cash_5)
+    @lottery.register_contestant(@grace, @pick_4)
+    @lottery.charge_contestants(@cash_5)
+    @lottery.charge_contestants(@mega_millions)
+    @lottery.charge_contestants(@pick_4)
+
+    assert_equal '2020-05-20', @lottery.draw_winners
+    assert_instance_of Array, @lottery.winners
+    assert_instance_of Hash, @lottery.winners.first
+    assert_instance_of Hash, @lottery.winners.last
+    assert_equal 3, @lottery.winners.length
+    @lottery.stubs(:winner).returns("Grace Hopper")
+    expected = "Grace Hopper won the Pick 4 on 05/20"
+    assert_equal expected, @lottery.announce_winner("Pick 4")
+  end
 
 end

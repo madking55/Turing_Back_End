@@ -1,3 +1,4 @@
+require 'date'
 class ColoradoLottery
 attr_reader :registered_contestants, :current_contestants, :winners
 
@@ -30,6 +31,25 @@ attr_reader :registered_contestants, :current_contestants, :winners
       contestant.spending_money -= game.cost
       current_contestants[game] << contestant.full_name
     end
+  end
+
+  def draw_winners
+  #  returns the date of the drawing as a string, and populates the #winners array with a random winner for each game based on available contestants
+    current_contestants.each { |game, contestants| @winners << { contestants.sample => game.name } }
+    Date.today.to_s
+  end
+
+  def winner(game_name)
+    winner = nil
+    @winners.each do |winner_hash|
+      winner = winner_hash.key(game_name) if winner_hash.key(game_name) != nil
+    end
+    winner
+  end
+
+  def announce_winner(game_name)
+    date = draw_winners[-5..-1].sub('-', '/')
+    "#{winner(game_name)} won the #{game_name} on #{date}"
   end
 
 end
