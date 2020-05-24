@@ -3,7 +3,6 @@ class Activity
   def initialize(name)
     @name = name
     @participants = {}
-    @total_cost = 0
   end
 
   def add_participant(person, paid)
@@ -11,7 +10,17 @@ class Activity
   end
 
   def total_cost
-    @participants.values.sum
+   @participants.values.sum
+  end
+
+  def split
+    total_cost / @participants.length
+  end
+
+  def owed
+    money_owed = Hash.new
+    @participants.each { |person, money| money_owed[person] = split - money }
+    money_owed
   end
 
 end
