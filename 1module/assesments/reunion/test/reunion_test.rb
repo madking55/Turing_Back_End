@@ -1,6 +1,7 @@
 require_relative 'test_helper'
 require './lib/reunion'
 require './lib/activity'
+require 'pry'
 
 class ReunionTest < Minitest::Test
   def setup
@@ -57,4 +58,59 @@ class ReunionTest < Minitest::Test
     assert_equal summary, @reunion.summary
     assert_instance_of String, @reunion.summary
   end
+
+  def test_it_returns_detailed_breakout
+    # One person owes one person
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @reunion.add_activity(@activity_1)
+    expected = {
+                "Maria" => [{
+                              activity: "Brunch",
+                              payees: ["Luther"],
+                              amount: 10
+                              }],
+                "Luther" => [{
+                                activity: "Brunch",
+                                payees: ["Maria"],
+                                amount: -10
+                              }]
+                }
+    assert_equal expected, @reunion.detailed_breakout
+
+    # One person owes two people
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @reunion.add_activity(@activity_2)
+    expected = {
+                "Maria" => [
+                              {
+                                activity: "Brunch",
+                                payees: ["Luther"],
+                                amount: 10
+                              },
+                              {
+                                activity: "Drinks",
+                                payees: ["Louis"],
+                                amount: -20
+                              }
+                            ],
+                "Luther" => [
+                              {
+                                activity: "Brunch",
+                                payees: ["Maria"],
+                                amount: -10
+                              },
+                              {
+                                activity: "Drinks",
+                                payees: ["Louis"],
+                                amount: -20
+                              }
+                            ]
+                }
+
+    assert_equal expected, @reunion.detailed_breakout
+  end
+  
 end

@@ -25,4 +25,36 @@ class Reunion
     breakout.map { |person, owed| "#{person}: #{owed}\n" }.join.chomp
   end
 
+  def get_payees(activity, name)
+    activity.participants.select { |participant| participant != name }.keys
+  end
+
+  def detailed_breakout_for_participant(name)
+    @activities.reduce([]) do |hash, activity|
+      next(hash) unless activity.participants[name]
+      payees = get_payees(activity, name)
+      hash << { 
+                  activity: activity.name, 
+                  payees: payees,
+                  amount: activity.owed[name] / payees.size
+                }
+    end
+  end
+
+  def all_participants
+    all_participants = []
+    @activities.each do |activity|
+      activity.participants.each do |participant, cost|
+        all_participants << participant unless all_participants.include?(participant)
+      end
+    end
+    all_participants
+  end
+
+  def detailed_breakout
+    all_participants.reduce({}) do |detailed_breakout, participant|
+      detailed_breakout[participant] = detailed_breakout_for_participant(participant)
+      detailed_breakout
+    end
+  end
 end
