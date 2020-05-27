@@ -26,7 +26,7 @@ class Reunion
   end
 
   def get_payees(activity, name)
-    activity.participants.select { |participant| participant != name }.keys
+    activity.participants.reject { |participant, owed| owed == activity.participants[name] }.keys
   end
 
   def detailed_breakout_for_participant(name)
