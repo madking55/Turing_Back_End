@@ -40,14 +40,13 @@ class Museum
 
 
   def patrons_by_exhibit_interest
-    hash = Hash.new 
-    @exhibits.each do |ex| 
-      hash[ex] = [] 
+    patrons_by_exhibit = {}
+    @exhibits.each do |exhibit| 
       @patrons.each do |patron|
-        hash[ex] << patron if patron.interests.include?(ex.name)
+        patrons_by_exhibit[exhibit] = exhibit.patrons(@patrons)
       end
     end
-    hash
+    patrons_by_exhibit
   end
 
   def ticket_lottery_contestants(exhibit)
