@@ -13,7 +13,7 @@ class MuseumTest < Minitest::Test
     @gems_and_minerals = Exhibit.new({name: "Gems and Minerals", cost: 0})
     @dead_sea_scrolls = Exhibit.new({name: "Dead Sea Scrolls", cost: 10})
     @imax = Exhibit.new({name: "IMAX",cost: 15})
-    @patron_1 = Patron.new("Bob", 0)
+    @patron_1 = Patron.new("Bob", 10)
     @patron_2 = Patron.new("Sally", 20)
     @patron_3 = Patron.new("Johnny", 5)
   end
@@ -91,6 +91,90 @@ class MuseumTest < Minitest::Test
     assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@imax)
     @dmns.stubs(:draw_lottery_winner).returns("Bob")
     assert_equal "Bob has won the Dead Sea Scrolls exhibit lottery", @dmns.announce_lottery_winner(@dead_sea_scrolls)
+  end
+
+  def test_patrons_can_attend_exhibits
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@imax)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    tj = Patron.new("TJ", 7)
+    tj.add_interest("IMAX")
+    tj.add_interest("Dead Sea Scrolls")
+    @dmns.admit(tj)
+    assert_equal 7, tj.spending_money
+
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("IMAX")
+    @dmns.admit(@patron_1)
+    assert_equal 0, @patron_1.spending_money
+
+    @patron_2.add_interest("IMAX")
+    @patron_2.add_interest("Dead Sea Scrolls")
+    @dmns.admit(@patron_2)
+    assert_equal 5, @patron_2.spending_money
+
+    morgan = Patron.new("Morgan", 15)
+    morgan.add_interest("Gems and Minerals")
+    morgan.add_interest("Dead Sea Scrolls")
+    @dmns.admit(morgan)
+    assert_equal 5, morgan.spending_money
+  end
+
+  def test_it_returns_revenue
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@imax)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    tj = Patron.new("TJ", 7)
+    tj.add_interest("IMAX")
+    tj.add_interest("Dead Sea Scrolls")
+    @dmns.admit(tj)
+    assert_equal 7, tj.spending_money
+
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("IMAX")
+    @dmns.admit(@patron_1)
+    assert_equal 0, @patron_1.spending_money
+
+    @patron_2.add_interest("IMAX")
+    @patron_2.add_interest("Dead Sea Scrolls")
+    @dmns.admit(@patron_2)
+    assert_equal 5, @patron_2.spending_money
+
+    morgan = Patron.new("Morgan", 15)
+    morgan.add_interest("Gems and Minerals")
+    morgan.add_interest("Dead Sea Scrolls")
+    @dmns.admit(morgan)
+    assert_equal 5, morgan.spending_money
+
+    assert_equal 35, @dmns.revenue
+  end
+
+  def test_it_returns_patrons_of_exhibits
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@imax)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    tj = Patron.new("TJ", 7)
+    tj.add_interest("IMAX")
+    tj.add_interest("Dead Sea Scrolls")
+    @dmns.admit(tj)
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("IMAX")
+    @dmns.admit(@patron_1)
+    @patron_2.add_interest("IMAX")
+    @patron_2.add_interest("Dead Sea Scrolls")
+    @dmns.admit(@patron_2)
+    morgan = Patron.new("Morgan", 15)
+    morgan.add_interest("Gems and Minerals")
+    morgan.add_interest("Dead Sea Scrolls")
+    @dmns.admit(morgan)
+
+    expected = {
+      @gems_and_minerals => [morgan],
+      @imax => [@patron_2],
+      @dead_sea_scrolls => [@patron_1, morgan]
+    }
+   
+    assert_equal expected, @dmns.patrons_of_exhibits
   end
 
 end
