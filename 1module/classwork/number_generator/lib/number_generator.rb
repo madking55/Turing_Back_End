@@ -1,5 +1,4 @@
 class NumberGenerator
-
   def initialize(max)
     @max = max
   end
