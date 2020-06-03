@@ -48,10 +48,10 @@ class TurnTest < Minitest::Test
     assert_equal player1, winner
 
     turn.pile_cards
-    assert_equal [card8, card7], turn.spoils_of_war
+    assert_equal [card1, card3], turn.spoils_of_war
     turn.award_spoils(winner)
   
-    assert_equal [card1, card2, card5, card7, card8], winner.deck.cards
+    assert_equal [card2, card5, card8, card1, card3], winner.deck.cards
     assert_equal [], turn.spoils_of_war
   end
 
