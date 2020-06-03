@@ -38,4 +38,28 @@ class Event
     end
     overstocked_items.keys
   end
+
+  def sell(item, q)
+    if total_inventory[item][:quantity] > q 
+      to_sell = q
+        food_trucks_that_sell(item).each do |truck|
+           if to_sell <= truck.inventory[item]
+            truck.inventory[item] -= to_sell
+            to_sell -= truck.inventory[item]
+           else
+            to_sell -= truck.inventory[item]
+            truck.inventory[item] = 0
+           end
+           to_sell
+        end
+      return true
+    else
+      return false
+    end
+  end
+
+  def date 
+    date = Date.today
+    date.strftime("%d/%m/%Y")
+  end
 end

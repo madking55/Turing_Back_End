@@ -3,6 +3,8 @@ require 'minitest/pride'
 require './lib/food_truck'
 require './lib/item'
 require './lib/event'
+require 'date'
+require 'mocha/minitest'
 
 class EventTest < Minitest::Test
 
@@ -88,6 +90,33 @@ class EventTest < Minitest::Test
   def test_it_returns_overstocked_items
     setup_event
     assert_equal [@item1], @event.overstocked_items
+  end
+
+  def test_it_can_sell_items
+    @item5 = Item.new({name: 'Onion Pie', price: '$25.00'})
+
+    @food_truck1.stock(@item1, 35)   
+    @food_truck1.stock(@item2, 7) 
+    @food_truck2.stock(@item4, 50)  
+    @food_truck2.stock(@item3, 25)
+    @food_truck3.stock(@item1, 65) 
+
+    @event.add_food_truck(@food_truck1) 
+    @event.add_food_truck(@food_truck2) 
+    @event.add_food_truck(@food_truck3) 
+
+    refute @event.sell(@item1, 200)
+    refute @event.sell(@item5, 1)
+    assert @event.sell(@item4, 5)
+    assert_equal 45, @food_truck2.check_stock(@item4)
+    assert @event.sell(@item1, 40)
+    assert_equal 0, @food_truck1.check_stock(@item1)
+
+  end
+
+  def test_it_has_date
+    @event.stubs(:date).returns("01/06/2020")
+    assert_equal "01/06/2020", @event.date
   end
 
 end
