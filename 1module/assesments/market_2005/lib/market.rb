@@ -1,3 +1,5 @@
+require 'pry'
+
 class Market 
 
 attr_reader :name, :vendors
@@ -31,10 +33,15 @@ attr_reader :name, :vendors
   end
 
   def overstocked_items
+    overstocked_items = total_inventory.select do |item, hash|
+      hash[:quantity] > 50 && hash[:vendors].size > 1
+    end
+    overstocked_items.keys
   end
 
   def sorted_item_list
-    
+    unique_items = total_inventory.keys
+    unique_items.map(&:name).sort
   end
 
 end

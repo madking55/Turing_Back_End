@@ -76,5 +76,10 @@ class MarketTest < Minitest::Test
     assert_equal expected, @market.sorted_item_list
   end
 
+  def test_it_returns_overstocked_items
+    setup_market
+    assert_equal [@item1], @market.overstocked_items
+  end
+
 
 end
