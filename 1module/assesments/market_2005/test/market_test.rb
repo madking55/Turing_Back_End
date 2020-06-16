@@ -2,6 +2,8 @@ require_relative 'test_helper'
 require './lib/market'
 require './lib/item'
 require './lib/vendor'
+require 'date'
+require 'mocha/minitest'
 
 class MarketTest < Minitest::Test
 
@@ -81,5 +83,23 @@ class MarketTest < Minitest::Test
     assert_equal [@item1], @market.overstocked_items
   end
 
+  def test_it_can_sell_items
+    setup_market
+    @item5 = Item.new({name: 'Onion', price: '$0.25'})
+
+    refute @market.sell(@item1, 200)
+    refute @market.sell(@item5, 1)
+    assert @market.sell(@item4, 5)
+
+    assert_equal 45, @vendor2.check_stock(@item4)
+    assert @market.sell(@item1, 40)
+    assert_equal 0, @vendor1.check_stock(@item1)
+    assert_equal 60, @vendor3.check_stock(@item1)
+  end
+
+  def test_it_return_date
+    @market.stubs(:date).returns("24/02/2020")
+    assert_equal "24/02/2020", @market.date
+  end
 
 end

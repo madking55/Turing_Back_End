@@ -44,4 +44,27 @@ attr_reader :name, :vendors
     unique_items.map(&:name).sort
   end
 
+  def sell(item, q)
+    if total_inventory[item][:quantity] >= q
+      to_sell = q
+      vendors_that_sell(item).each do |vendor|
+        if to_sell <= vendor.inventory[item]
+          vendor.inventory[item] -= to_sell
+          to_sell -= vendor.inventory[item]  
+        else
+          to_sell -= vendor.inventory[item]            
+          vendor.inventory[item] = 0
+        end
+        to_sell
+      end
+      return true
+    else
+      return false 
+    end
+  end
+
+  def date
+    date = Date.today
+    date.strftime("%d/%m/%Y")
+  end
 end
