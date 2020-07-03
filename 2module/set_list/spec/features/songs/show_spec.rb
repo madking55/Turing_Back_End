@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'as a visitor' do 
-  describe 'I visit the song show page' do
-    it "then I see only that song's title and artist" do
+  describe 'when I visit the song show page' do
+    it "I see only that song's title and artist" do
       talking_heads = Artist.create!(name: 'Talking Heads')
       she_was = talking_heads.songs.create(title: 'And She Was', length: 234, play_count: 2994 )
       wild_life = talking_heads.songs.create(title: 'Wild Wild Life', length: 456, play_count: 384889 )

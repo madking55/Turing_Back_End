@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'songs index page', type: :feature do 
-  it 'can see all songs titles and play count' do 
+RSpec.describe 'songs index page' do 
+  it 'I can see all songs titles and play count' do 
     carly_rae = Artist.create(name: 'Carly Rae')
     prince = Artist.create(name: 'Prince')
     # Different ways to associate songs with artists:
