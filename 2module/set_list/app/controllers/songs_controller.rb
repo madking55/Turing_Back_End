@@ -17,6 +17,11 @@ class SongsController < ApplicationController
     redirect_to "/songs/#{song.id}"
   end
 
+  def songs_by_artist
+    @artist = Artist.find(params[:artist_id])
+    @songs = Song.select { |song| song.artist_id == @artist.id }
+  end
+
   private
 
   def song_params
