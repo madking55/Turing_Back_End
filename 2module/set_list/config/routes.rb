@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/songs', to: 'songs#index'
   get '/songs/:id', to: 'songs#show'
+
   get '/artists', to: 'artists#index'
   get '/artists/new', to: 'artists#new'
   post '/artists', to: 'artists#create'
@@ -10,5 +11,7 @@ Rails.application.routes.draw do
   get '/artists/:artist_id/songs/new', to: 'songs#new'
   post '/artists/:artist_id/songs', to: 'songs#create'
   get '/artists/:artist_id/songs', to: 'songs#songs_by_artist'
+
+  get '/playlists', to: 'playlists#index'
 end
  
