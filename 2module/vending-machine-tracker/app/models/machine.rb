@@ -8,4 +8,8 @@ class Machine < ApplicationRecord
   def average_snacks_price
     snacks.empty? ? 'No Snacks in the Machine': snacks.average(:price)
   end
+
+  def snacks_count
+    snacks.empty? ? 'No Snacks in the Machine' : snacks.count
+  end
 end
