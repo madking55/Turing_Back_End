@@ -1,0 +1,15 @@
+<h1>Project Info</h1>
+
+<p>Name: <%= @project.name %> </p>
+<p>Material: <%= @project.material %> </p>
+<p>Challenge Theme: <%= @project.challenge.theme %> </p>
+<p>Number of Contestants: <%= @project.contestant_count %> </p>
+<p>Average Contestant Experience: <%= @project.average_experience %> years</p>
+
+<section id="add-contestant-form">
+  <%= form_tag "/contestant_projects?project_id=#{@project.id}" do %>
+    <%= label_tag :contestant_id %><br>
+    <%= text_field_tag :contestant_id %><br><br>
+    <%= submit_tag "Add Contestant To Project"%><br>
+  <% end %>
+</section>
