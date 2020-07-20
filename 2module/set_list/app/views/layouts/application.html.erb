@@ -9,12 +9,12 @@
   </head>
 
   <body>
+    <p>Cart: <%= cart.total_count %> </p>
     <% flash.each do |type, message| %>
       <section class=<%= type %>>
         <p><%= message %></p>
       </section>
     <% end %>
-    <p>Cart: <%= cart.total_count %> </p>
 
     <%= yield %>
   </body>

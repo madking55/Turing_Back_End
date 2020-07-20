@@ -4,7 +4,9 @@
   <section id="playlist-<%= playlist.id %>">
     <h2><%= playlist.name %></h2>
     <% playlist.songs.each do |song| %>
-      <p><%= song.title %></p>
+      <p>Title: <%= song.title %></p>
+      <p>Play Count: <%= song.play_count %></p>
+      <p>Lengtht: <%= song.length %></p>
     <% end %>
   </section>
 <% end %>

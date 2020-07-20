@@ -10,7 +10,12 @@ class Cart
   end
 
   def add_song(id)
-    @contents[id.to_s] = count_of(id) + 1
+    if @contents[id.to_s]
+      @contents[id.to_s] = @contents[id.to_s] + 1
+    else
+      @contents[id.to_s] = 0
+      @contents[id.to_s] = @contents[id.to_s] + 1
+    end
   end
 
   def count_of(id)

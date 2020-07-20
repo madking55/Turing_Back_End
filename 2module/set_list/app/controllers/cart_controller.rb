@@ -1,6 +1,10 @@
 class CartController < ApplicationController
   include ActionView::Helpers::TextHelper
 
+  def index
+    @song = Song.all
+  end
+
   def update
     song = Song.find(params[:song_id])
     cart.add_song(song.id)
