@@ -2,9 +2,7 @@
 
 <% @songs.each do |song| %>
     <section id="song-<%= song.id %>">
-      <p>Title: <%= song.title %></p>
-      <p>Play Count: <%= song.play_count %></p>
-      <p>Length: <%= song.length %></p>
+      <%= render partial: 'info', locals: {song: song } %>
       <%= button_to 'Add Song', "/cart/#{song.id}" , method: :patch %>
     </section>
 <% end %> 
