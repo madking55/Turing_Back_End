@@ -9,7 +9,7 @@ RSpec.describe 'Park Show Page' do
     visit "/parks/#{@hershey.id}"
   end
 
-  it 'shows name and addmision for the park' do
+  it 'shows name and admission for the park' do
     expect(page).to have_content("Name: Hershey Park")
     expect(page).to have_content("Admission: $50.00")
   end

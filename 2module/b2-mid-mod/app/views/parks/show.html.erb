@@ -1,2 +1,2 @@
 <h1>Name: <%= @park.name %> </h1>
-<h2>Admission: <%= @park.admission_to_currency %> </h2>
+<h2>Admission: <%= number_to_currency(@park.admission) %> </h2>
