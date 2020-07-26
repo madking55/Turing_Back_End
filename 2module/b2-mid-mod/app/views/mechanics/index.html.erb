@@ -1,0 +1,8 @@
+<h1>All Mechanics</h1>
+
+<%= @mechanics.each do |mechanic| %>
+  <section id="mechanic-<%= mechanic.id %>">
+   <h2><%= mechanic.name %> - <%= mechanic.years_of_exp %> years of experience </h2>
+  </section>
+<% end %>
+
