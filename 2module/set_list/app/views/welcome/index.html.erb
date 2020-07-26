@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= link_to "Log out" %>
+  <%= link_to "Log out", '/login', method: :delete %>
 <% else %>
   <%= link_to "Register as a User", "/users/new" %>
   <%= link_to "I already have an account", "/login" %>
