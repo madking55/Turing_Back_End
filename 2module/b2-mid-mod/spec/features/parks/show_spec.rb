@@ -2,9 +2,9 @@ RSpec.describe 'Park Show Page' do
 
   before :each do
     @hershey = Park.create!(name: 'Hershey Park', admission: 50)
-    # @racer = Ride.create!(name: 'Lightning Racer', rating: 7, park_id: @hershey.id)
-    # @runner = Ride.create!(name: 'Storm Runner', rating: 8, park_id: @hershey.id)
-    # @bear = Ride.create!(name: 'The Great Bear', rating: 9, park_id: @hershey.id)
+    @runner = Ride.create!(name: 'Storm Runner', rating: 8, park_id: @hershey.id)
+    @racer = Ride.create!(name: 'Lightning Racer', rating: 7, park_id: @hershey.id)
+    @bear = Ride.create!(name: 'The Great Bear', rating: 9, park_id: @hershey.id)
 
     visit "/parks/#{@hershey.id}"
   end
@@ -15,7 +15,9 @@ RSpec.describe 'Park Show Page' do
   end
 
   it 'shows names of all rides in the park in alphabetical order' do
-    
+    expect(page.all('li')[0]).to have_content('Lightning Racer')
+    expect(page.all('li')[1]).to have_content('Storm Runner')
+    expect(page.all('li')[2]).to have_content('The Great Bear')
   end
 
   it 'shows average thrill rating of the park rides' do
