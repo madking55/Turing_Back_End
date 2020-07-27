@@ -6,8 +6,8 @@ RSpec.describe 'Mechanic Show Page' do
     @racer = Ride.create!(name: 'Lightning Racer', rating: 7, park_id: @hershey.id)
     @bear = Ride.create!(name: 'The Great Bear', rating: 9, park_id: @hershey.id)
 
-    RideMechanic.create!(mechanic_id: @mechanic_1.id, ride_id: @runner.id)
-    RideMechanic.create!(mechanic_id: @mechanic_1.id, ride_id: @racer.id)
+    MechanicRide.create!(mechanic_id: @mechanic_1.id, ride_id: @runner.id)
+    MechanicRide.create!(mechanic_id: @mechanic_1.id, ride_id: @racer.id)
 
     visit "mechanics/#{@mechanic_1.id}"
   end
@@ -21,6 +21,13 @@ RSpec.describe 'Mechanic Show Page' do
   end
 
   it 'has a form to add a ride to their workload' do
-    
+    expect(page).to have_content('Add a ride to workload:')
+    expect(page).to_not have_content("#{@bear.name}")
+
+    fill_in :ride_id, with: @bear.id
+    click_on 'Submit'
+
+    expect(current_path).to eq("/mechanics/#{@mechanic_1.id}")
+    expect(page).to have_content("#{@bear.name}")
   end
 end
