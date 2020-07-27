@@ -15,19 +15,19 @@ RSpec.describe 'Mechanic Show Page' do
   it 'shows name, years of exp and rides they are working on' do
     expect(page).to have_content("Mechanic: #{@mechanic_1.name}")
     expect(page).to have_content("Years of Experience: #{@mechanic_1.years_of_exp}")
-    expect(page).to have_content("#{@runner.name}")
-    expect(page).to have_content("#{@racer.name}")
-    expect(page).to_not have_content("#{@bear.name}")
+    expect(page).to have_content(@runner.name)
+    expect(page).to have_content(@racer.name)
+    expect(page).to_not have_content(@bear.name)
   end
 
   it 'has a form to add a ride to their workload' do
     expect(page).to have_content('Add a ride to workload:')
-    expect(page).to_not have_content("#{@bear.name}")
+    expect(page).to_not have_content(@bear.name)
 
     fill_in :ride_id, with: @bear.id
     click_on 'Submit'
 
     expect(current_path).to eq("/mechanics/#{@mechanic_1.id}")
-    expect(page).to have_content("#{@bear.name}")
+    expect(page).to have_content(@bear.name)
   end
 end

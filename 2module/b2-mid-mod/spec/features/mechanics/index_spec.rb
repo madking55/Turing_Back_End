@@ -7,11 +7,11 @@ RSpec.describe 'Meachanics Index Page' do
 
     expect(page).to have_content('All Mechanics')
     within("#mechanic-#{mechanic_1.id}") do
-      expect(page).to have_content("Sam Mills - 10 years of experience")
+      expect(page).to have_content("#{mechanic_1.name} - #{mechanic_1.years_of_exp} years of experience")
     end
 
     within("#mechanic-#{mechanic_2.id}") do
-      expect(page).to have_content("Kara Smith - 11 years of experience")
+      expect(page).to have_content("#{mechanic_2.name } - #{mechanic_2.years_of_exp} years of experience")
     end
   end
 end

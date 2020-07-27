@@ -10,14 +10,14 @@ RSpec.describe 'Park Show Page' do
   end
 
   it 'shows name and admission for the park' do
-    expect(page).to have_content("Name: Hershey Park")
+    expect(page).to have_content("Name: #{@hershey.name}")
     expect(page).to have_content("Admission: $50.00")
   end
 
   it 'shows names of all rides in the park in alphabetical order' do
-    expect(page.all('li')[0]).to have_content('Lightning Racer')
-    expect(page.all('li')[1]).to have_content('Storm Runner')
-    expect(page.all('li')[2]).to have_content('The Great Bear')
+    expect(page.all('li')[0]).to have_content(@racer.name)
+    expect(page.all('li')[1]).to have_content(@runner.name)
+    expect(page.all('li')[2]).to have_content(@bear.name)
   end
 
   it 'shows average thrill rating of the park rides' do
