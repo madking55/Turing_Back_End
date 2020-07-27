@@ -1,0 +1,12 @@
+<h1>Name: <%= @park.name %> </h1>
+<h2>Admission: <%= number_to_currency(@park.admission) %> </h2>
+<section class='rides-list'>
+  <h2>Rides:</h2>
+  <ol></ol>
+    <%= @park.rides.alphabetical_order.each do |ride| %>
+      <li><%= ride.name %></li>  
+    <% end %>
+  </ol>
+</section>
+<h2>Average Thrill Rating of Rides: <%= @park.rides.average_rating %>/10</h2>
+
