@@ -17,7 +17,7 @@ RSpec.describe 'Astronauts Index Page' do
   end
 
   it 'shows average age of all astronauts' do
-    expect(page).to have_content("Average Age: 43")
+    expect(page).to have_content("Average Age of Astronauts: 43")
   end
 
   it 'lists space missions for each astronaut in alphabetical order' do
@@ -32,5 +32,9 @@ RSpec.describe 'Astronauts Index Page' do
     within("#astronaut-#{@armstrong.id}") do
       expect(page).to have_content("Missions: #{apollo.title}, #{capricorn.title}, #{gemini.title}")
     end
+
+    within("#astronaut-#{@behnken.id}") do
+    expect(page).to have_content("Missions: No Missions yet")
+
   end
 end

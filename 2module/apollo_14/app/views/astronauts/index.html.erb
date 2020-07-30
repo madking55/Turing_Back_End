@@ -3,8 +3,14 @@
 <% @astronauts.each do |astronaut| %>
   <section id="astronaut-<%= astronaut.id %>">
     <p>Name: <%= astronaut.name %>, Age: <%= astronaut.age %>, Job: <%= astronaut.job %></p>
-    <p>Missions: <%= astronaut.missions.alphabetical_titles.join(', ') %></p>
+    <p>Missions: 
+      <% if astronaut.missions.empty? %>
+        No Missions yet
+      <% else %>
+        <%= astronaut.missions.alphabetical_titles.join(', ') %>
+      <% end %>
+    </p>
   </section>
 
-  <p>Average Age: <%= @astronauts.average_age %></p>
+  <p>Average Age of Astronauts: <%= @astronauts.average_age %></p>
 <% end %>
