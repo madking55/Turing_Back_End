@@ -4,15 +4,15 @@ RSpec.describe 'Edit Artist' do
       it 'I can edit artist' do 
         beatles = Artist.create(name: 'Beatles')
 
-        visit '/artists'
+        visit artists_path
         click_on "Edit #{beatles.name}"
 
-        expect(current_path).to eq("/artists/#{beatles.id}/edit") 
+        expect(current_path).to eq(edit_artist_path(beatles)) 
 
         fill_in :name, with: 'The Beatles'
         click_on 'Update Artist'
 
-        expect(current_path).to eq('/artists')
+        expect(current_path).to eq(artists_path)
         expect(page).to have_content('The Beatles')
       end
     end

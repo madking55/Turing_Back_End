@@ -1,6 +1,6 @@
 <h1>New Song</h1>
 
-<%= form_tag "/artists/#{@artist_id}/songs", method: :post do %>
+<%= form_tag artist_songs_path(@artist_id), method: :post do %>
   <%= label_tag :title %>
   <%= text_field_tag :title %>
   <%= label_tag :length %>

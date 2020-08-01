@@ -7,7 +7,7 @@ RSpec.describe 'as a visitor' do
       she_was = talking_heads.songs.create(title: 'And She Was', length: 234, play_count: 2994 )
       wild_life = talking_heads.songs.create(title: 'Wild Wild Life', length: 456, play_count: 384889 )
 
-      visit "/songs/#{she_was.id}"
+      visit song_path(she_was)
 
       expect(page).to have_content(she_was.title)
       expect(page).to have_content("By: #{talking_heads.name}")

@@ -1,7 +1,7 @@
 <h1>Add New Artist</h1>
 
 <%= render partial: 'form', locals: {
-                                      path: '/artists',
+                                      path: artists_path,
                                       method: :post,
                                       button_text: "Create Artist",
                                       artist: Artist.new } %>

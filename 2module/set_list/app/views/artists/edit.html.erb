@@ -1,7 +1,7 @@
 <h1>Edit <%= @artist.name %></h1>
 
 <%= render partial: 'form', locals: {
-                                      path: "/artists/#{@artist.id}",
+                                      path: artist_path(@artist),
                                       method: :patch,
                                       button_text: 'Update Artist',
                                       artist: @artist } %>

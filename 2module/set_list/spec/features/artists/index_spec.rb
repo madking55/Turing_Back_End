@@ -5,7 +5,7 @@ RSpec.describe 'artists index page' do
     carly_rae = Artist.create(name: 'Carly Rae')
     prince = Artist.create(name: 'Prince')
 
-    visit '/artists'
+    visit artists_path
 
     expect(page).to have_content('Prince')
     expect(page).to have_content('Carly Rae')

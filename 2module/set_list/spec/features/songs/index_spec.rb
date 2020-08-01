@@ -9,7 +9,7 @@ RSpec.describe 'songs index page' do
     song_2 = Song.create(title: 'Call Me Maybe', length: 199, play_count: 1214722172, artist_id: carly_rae.id)
     song_3 = prince.songs.create(title: 'Purple Rain', length: 300, play_count: 1467408565)
 
-    visit '/songs'
+    visit songs_path
     expect(page).to have_content(song_1.title) 
     expect(page).to have_content("Play Count: #{song_1.play_count}")
 

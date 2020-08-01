@@ -7,7 +7,7 @@ RSpec.describe 'creating a new song' do
     length = 250
     play_count = 15673
 
-    visit "/artists/#{artist.id}/songs/new"
+    visit new_artist_song_path(artist)
 
     fill_in :title, with: title
     fill_in :length, with: length
@@ -17,7 +17,7 @@ RSpec.describe 'creating a new song' do
 
     new_song = Song.last
 
-    expect(current_path).to eq("/songs/#{new_song.id}")
+    expect(current_path).to eq(song_path(new_song))
     expect(page).to have_content(artist.name)
     expect(page).to have_content(title)
     expect(page).to have_content(length)

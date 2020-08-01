@@ -9,16 +9,20 @@ class ArtistsController < ApplicationController
   def create
     artist = Artist.new(artist_params)
     if artist.save
-      redirect_to '/artists'
+      redirect_to artists_path
     else
       flash[:notice] = 'Artist not created: Required information missing.'
-      redirect_to '/artists/new'
+      redirect_to new_artist_path
     end
+  end
+
+  def show
+    @artist = Artist.find(params[:id])
   end
 
   def destroy
     Artist.destroy(params[:id])
-    redirect_to '/artists'
+    redirect_to artists_path
   end
 
   def edit
@@ -28,7 +32,7 @@ class ArtistsController < ApplicationController
   def update
     artist = Artist.find(params[:id])
     artist.update(artist_params)
-    redirect_to '/artists'
+    redirect_to artists_path
   end
 
   private
