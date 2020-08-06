@@ -6,9 +6,9 @@ RSpec.describe 'Dish Show Page' do
     tomato_sauce = Ingredient.create(name: 'Tomato Sauce', calories: 150)
     olive_oil = Ingredient.create!(name: "Olive Oil", calories: 563)
 
-    DishIngredient.create!(dish_id: bolognese.id, ingredient_id: pasta.id)
-    DishIngredient.create!(dish_id: bolognese.id, ingredient_id: tomato_sauce.id)
-    DishIngredient.create!(dish_id: bolognese.id, ingredient_id: olive_oil.id)
+    DishIngredient.create!(dish: bolognese, ingredient: pasta)
+    DishIngredient.create!(dish: bolognese, ingredient: tomato_sauce)
+    DishIngredient.create!(dish: bolognese, ingredient: olive_oil)
 
     visit dish_path(bolognese)
 
@@ -20,4 +20,4 @@ RSpec.describe 'Dish Show Page' do
       expect(page).to have_content(olive_oil.name)
     end
   end
-end
+end 
