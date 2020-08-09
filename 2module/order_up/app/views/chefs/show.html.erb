@@ -1,3 +1,5 @@
 <h1>Chef: <%= @chef.name %> </h1>
 
 <%= link_to "See All Chef's Ingredients", "/chefs/#{@chef.id}/ingredients" %>
+
+<h2>Chef's Top Three Ingredients: <%= @chef.top_three_ingredients.join(', ' ) %> </h2>

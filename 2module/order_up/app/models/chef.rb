@@ -6,4 +6,8 @@ class Chef <ApplicationRecord
   def uniq_ingredients
     ingredients.distinct
   end
+
+  def top_three_ingredients
+    ingredients.select('ingredients.*').group('ingredients.id').order('count(ingredients) DESC').pluck('ingredients.name')
+  end
 end
