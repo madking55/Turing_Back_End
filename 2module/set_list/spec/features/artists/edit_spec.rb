@@ -9,7 +9,7 @@ RSpec.describe 'Edit Artist' do
 
         expect(current_path).to eq(edit_artist_path(beatles)) 
 
-        fill_in :name, with: 'The Beatles'
+        fill_in 'Name', with: 'The Beatles'
         click_on 'Update Artist'
 
         expect(current_path).to eq(artists_path)
