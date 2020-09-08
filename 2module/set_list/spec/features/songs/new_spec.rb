@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'creating a new song' do
-  it 'can create new song' do
+RSpec.describe 'Creating a new Song' do
+  it 'should create new song for an Artist' do
     artist = Artist.create!(name: 'Prince')
     title = 'Purple Rain'
     length = 250
@@ -9,9 +9,9 @@ RSpec.describe 'creating a new song' do
 
     visit new_artist_song_path(artist)
 
-    fill_in :title, with: title
-    fill_in :length, with: length
-    fill_in :play_count, with: play_count
+    fill_in 'Title', with: title
+    fill_in 'Length', with: length
+    fill_in 'Play count', with: play_count
 
     click_on 'Create Song'
 
