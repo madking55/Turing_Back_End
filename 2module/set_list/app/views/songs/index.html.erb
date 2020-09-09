@@ -1,6 +1,8 @@
 <h1>All Songs</h1>
 
 <% @songs.each do |song| %>
-  <h2><%= song.title %></h2>
-  <p>Play Count: <%= song.play_count %></p>
+    <section id="song-<%= song.id %>">
+      <%= render partial: 'info', locals: {song: song } %>
+      <%= button_to 'Add Song', "/cart/#{song.id}" , method: :patch %>
+    </section>
 <% end %> 

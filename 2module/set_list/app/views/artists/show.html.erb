@@ -1,0 +1,7 @@
+<h1>Songs by <%= "#{@artist.name}"%> </h1>
+
+<% @artist.songs.each do |song| %>
+  <h2><%= song.title %></h2>
+  <p>Length: <%= song.length %></p>
+  <p>Play Count: <%= song.play_count %></p>
+<% end %> 
