@@ -3,7 +3,15 @@ require 'faraday'
 
 class GhibliSearch
   def all_films
-    get_json("films")
+    get_json('films')
+  end
+
+  def all_people
+    get_json('people')
+  end
+
+  def film(film_id)
+    get_json("films/#{film_id}")
   end
 
   def get_json(path)
