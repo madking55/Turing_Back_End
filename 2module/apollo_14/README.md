@@ -32,7 +32,7 @@ Fork this repository and clone your newly created repository.
 ## User Stories
 
 ```
-User Story 1 of 4
+[X] User Story 1 of 4
 
 As a visitor,
 When I visit '/astronauts'
@@ -45,7 +45,7 @@ I see a list of astronauts with the following info:
 ```
 
 ```
-User Story 2 of 4
+[X] User Story 2 of 4
 
 As a visitor,
 When I visit '/astronauts'
@@ -55,7 +55,7 @@ I see the average age of all astronauts.
 ```
 
 ```
-User Story 3 of 4
+[X] User Story 3 of 4
 
 As a visitor,
 When I visit '/astronauts'
@@ -67,7 +67,7 @@ I see a list of the space missions' in alphabetical order for each astronaut.
 ```
 
 ```
-User Story 4 of 4
+[X] User Story 4 of 4
 
 As a visitor,
 When I visit '/astronauts'
