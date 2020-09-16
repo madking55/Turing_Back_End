@@ -23,4 +23,20 @@ RSpec.describe 'Astronauts Index Page' do
 
     expect(page).to have_content("Average Age: 43")
   end
+
+  it 'shows missions in alphabetical order for each astronaut' do
+    armstrong = Astronaut.create!(name: "Neil Armstrong", age: 37, job: "Commander")
+
+    gemini = Mission.create!(title: "Gemini 7", time_in_space: 40)
+    apollo = Mission.create!(title: "Apollo 13", time_in_space: 14)
+    capricorn = Mission.create!(title: "Capricorn 4", time_in_space: 24)
+
+    armstrong_gemini = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: gemini.id)
+    armstrong_apollo = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: apollo.id)
+    armstrong_capricorn = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: capricorn.id)
+
+    visit '/astronauts'
+
+    expect(page).to have_content("Missions: #{apollo.title}, #{capricorn.title}, #{gemini.title}")
+  end
 end
