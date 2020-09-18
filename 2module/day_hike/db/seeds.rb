@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+trip_1 = Trip.create!(name: 'Trip One')
+trip_2 = Trip.create!(name: 'Trip Two')
