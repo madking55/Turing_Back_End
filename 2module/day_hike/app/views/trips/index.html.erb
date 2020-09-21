@@ -1,0 +1,5 @@
+<h1>All Trips</h1>
+
+<% @trips.each do |trip| %>
+  <p>Trip Name: <%= link_to trip.name, "/trips/#{trip.id}" %> </p>
+<% end %>
