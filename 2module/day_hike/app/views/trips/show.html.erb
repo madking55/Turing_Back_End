@@ -8,5 +8,11 @@
   </ul>
 <% end %>
 
-<h2>Total Hiking Distance: <%= @trip.total_distance %></h2>
-<h2>Average Hiking Distance: <%= @trip.average_distance %></h2>
+<% unless @trip.trails.empty? %>
+  <h2>Total Hiking Distance: <%= @trip.total_distance %></h2>
+  <h2>Average Hiking Distance: <%= @trip.average_distance %></h2>
+  <h2>Longest Trip Trail: <%= @trip.longest_trail.name %>, Distance: <%= @trip.longest_trail.length %></h2>
+  <h2>Shortest Trip Trail: <%= @trip.shortest_trail.name %>, Distance: <%= @trip.shortest_trail.length %></h2>
+<% else %>
+  <h2>No Trails for this trip yet</h2>
+<% end %>
