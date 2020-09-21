@@ -39,4 +39,13 @@ RSpec.describe "Trips Show Page" do
   it 'shows the name of the shortest trail included on that trip' do
     expect(page).to have_content("Shortest Trip Trail: #{@trail_1.name}, Distance: #{@trail_1.length}")
   end
+
+  it 'has links to see a unique page for a specific trail' do
+    click_on "#{@trail_1.name}"
+    expect(current_path).to eq("/trails/#{@trail_1.id}")
+
+    visit "/trips/#{@trip_1.id}"
+    click_on "#{@trail_2.name}"
+    expect(current_path).to eq("/trails/#{@trail_2.id}")
+  end
 end

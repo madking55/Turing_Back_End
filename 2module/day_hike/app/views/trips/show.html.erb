@@ -2,7 +2,7 @@
 
 <% @trip.trails.each do |trail| %>
   <ul class="trail-<%= trail.id %>-details">
-    <li>Name: <%= trail.name %></li>
+    <li>Name: <%= link_to trail.name, "/trails/#{trail.id}" %></li>
     <li>Address: <%= trail.address %></li>
     <li>Length: <%= trail.length %></li>
   </ul>
@@ -14,5 +14,5 @@
   <h2>Longest Trip Trail: <%= @trip.longest_trail.name %>, Distance: <%= @trip.longest_trail.length %></h2>
   <h2>Shortest Trip Trail: <%= @trip.shortest_trail.name %>, Distance: <%= @trip.shortest_trail.length %></h2>
 <% else %>
-  <h2>No Trails for this trip yet</h2>
+  <h2>No Trails for this Trip yet</h2>
 <% end %>
