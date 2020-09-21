@@ -29,4 +29,15 @@ RSpec.describe 'Trail Show Page' do
       expect(page).to have_content(@trip_2.total_distance)
     end
   end
+
+  it 'shows the total number of trips where this trail was included' do
+
+    expect(page).to have_content('Total Number of Trips: 2')
+    
+    visit "/trails/#{@trail_2.id}"
+    expect(page).to have_content('Total Number of Trips: 1')
+
+    visit "/trails/#{@trail_3.id}"
+    expect(page).to have_content('Total Number of Trips: No Trips yet')
+  end
 end
