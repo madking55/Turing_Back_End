@@ -1,1 +1,10 @@
-<h1><%= @trip.name %> Show Page</h1>
+<h1>All Trails for <%= @trip.name %> </h1>
+
+<% @trip.trails.each do |trail| %>
+  <ul class="trail-<%= trail.id %>-details">
+    <li>Name: <%= trail.name %></li>
+    <li>Address: <%= trail.address %></li>
+    <li>Length: <%= trail.length %></li>
+  </ul>
+<% end %>
+
