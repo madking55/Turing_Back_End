@@ -29,4 +29,11 @@ RSpec.describe "Trips Show Page" do
 
     expect(page).to have_content("Total Hiking Distance: #{@trip_1.total_distance}")
   end
+
+  it 'shows the average hiking distance of all trail on that trip' do
+    visit "/trips/#{@trip_1.id}"
+
+    expect(page).to have_content("Average Hiking Distance: #{@trip_1.average_distance}")
+  end
+  
 end
