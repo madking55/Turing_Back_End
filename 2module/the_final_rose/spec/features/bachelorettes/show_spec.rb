@@ -1,20 +1,3 @@
-# User Story 1 of 6
-
-# As a visitor,
-# When I visit '/bachelorettes/:id',
-# I see that bachelorette's:
-# -Name
-# -Season Number
-# -Description of Season that they were on
-# (e.g.             
-#                   Hannah Brown
-#     Season 15 - The Most Dramatic Season Yet!
-#   )
-# I also see a link to see that bachelorette's contestants
-# When I click on that link
-# I'm taken to "/bachelorettes/:bachelorette_id/contestants"
-# and I can see only that bachelorette's contestants
-
 require 'rails_helper'
 
 RSpec.describe 'Bachelorettes Show Page' do
