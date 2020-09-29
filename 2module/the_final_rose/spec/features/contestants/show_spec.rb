@@ -1,6 +1,3 @@
-
-# When I click on an outing name, I'm taken to that outings show page
-
 require 'rails_helper'
 
 RSpec.describe 'Contestant Show Page' do
