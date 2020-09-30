@@ -13,14 +13,12 @@ RSpec.describe 'Contestant Show Page' do
     visit "/contestants/#{@contestant_1.id}"
   end
 
-  
   it 'shows contestants name, season number and description' do
     expect(page).to have_content("Contestant: #{@contestant_1.name}")
     expect(page).to have_content("Season #{@bachelorette_1.season_number} - #{@bachelorette_1.season_description}")
   end
   
   it 'has links for outing names' do
-
     expect(page).to have_link(@outing_1.name)
     expect(page).to have_link(@outing_2.name)
     click_link(@outing_1.name)

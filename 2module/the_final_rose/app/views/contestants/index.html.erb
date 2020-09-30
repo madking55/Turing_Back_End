@@ -1,9 +1,16 @@
 <h1>Contestants for <%= @bachelorette.name %></h1>
 
-<%= @bachelorette.contestants.each do |contestant| %>
+<% @bachelorette.contestants.each do |contestant| %>
     <ul class="contestant-<%= contestant.id %>-info"> 
       <li>Name: <%= link_to contestant.name, "/contestants/#{contestant.id}" %></li>
       <li>Age: <%= contestant.age %></li> 
       <li>Hometown: <%= contestant.hometown %></li>
     </ul>
 <% end %>
+
+<section class='unique_hometowns'>
+  <h2>These Contestants are from these hometowns: </h2>
+  <% @bachelorette.contestants_unique_hometowns.each do |hometown| %>
+    <p><%= hometown %></p>
+  <% end %>
+</section>
