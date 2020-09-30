@@ -25,4 +25,8 @@ RSpec.describe 'Bachelorettes Show Page' do
     expect(page).to have_content("#{@contestant_2.name}")
     expect(page).not_to have_content("#{@contestant_3.name}")
   end
+
+  it 'shows an average age of all bachelorette contestants' do
+    expect(page).to have_content("Average Age of Contestants: #{@bachelorette_1.contestants_avg_age}")
+  end
 end
