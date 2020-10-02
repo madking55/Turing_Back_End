@@ -1,0 +1,14 @@
+<h1>Passenger Name: <%= @passenger.name %></h1>
+
+<section class='flights'>
+  <h2>Flights:</h2>
+  <% if @passenger.flights.empty? %>
+    <p>No flights yet</p>
+    <% else %>
+      <% @passenger.flights.each do |flight| %>
+        <p class="flight-<%= flight.id %>">
+          Flight Number: <%= link_to "#{flight.number}", "/flights/#{flight.id}"%>
+        </p>
+      <% end %>
+    <% end %>
+</section>
