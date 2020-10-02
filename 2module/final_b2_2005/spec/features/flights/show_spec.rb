@@ -19,7 +19,8 @@ RSpec.describe 'Flights Show Page' do
     PassengerFlight.create!(flight: @flight_1, passenger: @sally)
     PassengerFlight.create!(flight: @flight_2, passenger: @michael)
 
-    visit "/flights/#{@flight_1.id}"
+    visit flight_path(@flight_1.id)
+    
   end
   
   it 'shows all info for this flight (number, date, time, departure and arrival city' do
