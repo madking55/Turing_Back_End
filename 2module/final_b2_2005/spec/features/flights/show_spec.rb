@@ -20,7 +20,6 @@ RSpec.describe 'Flights Show Page' do
     PassengerFlight.create!(flight: @flight_2, passenger: @michael)
 
     visit flight_path(@flight_1.id)
-    
   end
   
   it 'shows all info for this flight (number, date, time, departure and arrival city' do
@@ -43,5 +42,10 @@ RSpec.describe 'Flights Show Page' do
     expect(page).to have_content(@john.name)
     expect(page).to have_content(@sally.name)
     expect(page).to_not have_content(@michael.name)
+  end
+
+  it 'shows the number of minors and adults on that flight' do
+    expect(page).to have_content("Number of Minors on Board: 2")
+    expect(page).to have_content("Number of Adults on Board: 3")
   end
 end
