@@ -1,0 +1,23 @@
+<h1>Passenger Name: <%= @passenger.name %></h1>
+
+<section class='flights'>
+  <h2>Flights:</h2>
+  <% if @passenger.flights.empty? %>
+    <p>No flights yet</p>
+    <% else %>
+      <% @passenger.flights.each do |flight| %>
+        <p class="flight-<%= flight.id %>">
+          Flight Number: <%= link_to "#{flight.number}", flight_path(flight.id) %>
+        </p>
+      <% end %>
+    <% end %>
+</section>
+
+<section class='add-flight-form'>
+<h3>Add Flight for <%= @passenger.name %></h3>
+  <%= form_tag "/passengers/#{@passenger.id}/flights" do %>
+    <%= label_tag :flight_number, 'Flight Number' %>
+    <%= number_field_tag :flight_number %>
+    <%= submit_tag 'Add Flight' %>
+  <% end %>
+</section>
